@@ -1,0 +1,50 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+%matplotlib inline 
+
+CMC_data = pd.read_csv("CustomerMedicalConditions04Nov21.csv")
+CC_data = pd.read_csv("CCDate2018-2021_AllTime_Data.csv")
+
+# Cleaning data
+# Why? -> this is because in medical data, in some cases, multiple rows are repeated for an External ID because there are different StaffPlanConditions for the same External ID.
+# So, to analysis the age distribution for different medical conditions, every user(External ID) should only be counted for once.
+data_18 = CMC_data.drop(CMC_data.index[CMC_data['Age'] < 18])  
+data_18_DOB = data_18.dropna(axis = 0, subset = ["DateOfBirth"] )  
+noID_data = data_18_DOB.drop_duplicates(subset=['ExternalID'], keep='first')
+
+# for data in [CareSysCondtions], if they are NaN, change it to 'Unknown Condition' 
+noCon_noID_data = noID_data.copy()
+Cons_data = noCon_noID_data['CareSysCondition']
+CountCon=0
+
+for Cons in Cons_data:
+    if pd.isnull(Cons):
+        noCon_noID_data.iloc[CountCon,6] = 'Unknown Condition'
+    CountCon += 1
+    
+# Use assertions to make sure the there is no repeating external ID, and all no null value
+count = 0
+for ID in noCon_noID_data['ExternalID']:
+    for other_id in noCon_noID_data['ExternalID'][0:count]:
+        assert ID != other_id, "One External ID should not appear more than once!"
+    count += 1
+for Cons in noCon_noID_data['CareSysCondition']:
+    assert Cons != '', "There is still null!"
+    
+    
+# Data being group by CareSysCondition, to explore the age distribution in each group(CareSysCondition)
+group_condition = noCon_noID_data.groupby('CareSysCondition')
+
+# to give an order for different'CareSysCondition' by the average age
+avg_age = group_condition.agg({'Age':np.mean}).sort_values('Age')
+
+# data visualization
+plt.figure(figsize=(16,9),dpi=100)
+sns.set(style='darkgrid',font_scale=1.2,palette='pastel')
+sns.boxplot(x='CareSysCondition', y='Age', data=noCon_noID_data, order = avg_age.index)
+plt.xticks(rotation=75,fontsize=10)
+plt.yticks(fontsize=10)
+plt.title('Age Distribution of groups with different Care System Condition',fontsize=20)
+plt.show()
