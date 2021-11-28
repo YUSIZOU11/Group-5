@@ -1,0 +1,14 @@
+# Creat Pie chart for Gender Contribution in Usage with different Care System Condition
+# 
+for name,group in Time_Condition_data_no_unknown.groupby('CareSysCondition'):
+    count_f = (group.loc[group['Gender'] == 'F']).shape[0]
+    count_m = (group.loc[group['Gender'] == 'M']).shape[0]
+    count_u = (group.loc[group['Gender'] == 'U']).shape[0]
+    gender_name = ['Female','Male','Unknown']
+    gender_size_count = [count_f,count_m, count_u]
+    plt.figure(figsize=(2,2), dpi=75)
+    plt.pie(gender_size_count, labels=gender_name, autopct="%1.2f%%", wedgeprops = {'width' : 0.4})
+    plt.legend(bbox_to_anchor = (1,1))
+    plt.title("Gender Contribution in Activity Usage of group with " + name, fontsize=10, y=1.08) # Give some space between Title and fig
+    plt.axis('equal')
+    plt.show()
