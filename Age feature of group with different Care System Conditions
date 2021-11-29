@@ -40,7 +40,7 @@ group_condition = noCon_noID_data.groupby('CareSysCondition')
 # to give an order for different'CareSysCondition' by the average age
 avg_age = group_condition.agg({'Age':np.mean}).sort_values('Age')
 
-# data visualization-
+# data visualization
 plt.figure(figsize=(16,9),dpi=100)
 sns.set(style='darkgrid',font_scale=1.2,palette='pastel')
 sns.boxplot(x='CareSysCondition', y='Age', data=noCon_noID_data, order = avg_age.index)
