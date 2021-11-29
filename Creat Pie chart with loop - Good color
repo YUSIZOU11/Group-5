@@ -1,5 +1,5 @@
 # Creat Pie chart for Gender Contribution in Usage with different Care System Condition
-# with Loop
+# with Loop-
 for name,group in Time_Condition_data_no_unknown.groupby('CareSysCondition'):
     count_f = (group.loc[group['Gender'] == 'F']).shape[0]
     count_m = (group.loc[group['Gender'] == 'M']).shape[0]
