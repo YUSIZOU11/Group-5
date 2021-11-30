@@ -103,3 +103,27 @@ pic = plt.figure(figsize=(7,7),dpi=80)
 Location_counts = CCDate_2021_Data_ClRole_ClEx['Location'].value_counts()
 plt.pie(Location_counts, labels = Location_counts.index, startangle = 90, counterclock = False, autopct=make_autopct(Location_counts));
 plt.show()
+
+# Relationships between Variables Analysed
+
+# 1. Usage amount per month**    
+# Usage amount per month
+pic = plt.figure(figsize=(10,6),dpi=80) 
+
+Usage_amount_data_list = []
+Usage_amount_month_list = []
+
+# Identify the month and generate the dataset by identifying the beginning of the Time list string
+for x in range(3, 12): 
+    Usage_amount_data_list.append(len(CCDate_2021_Data_ClRole_ClEx[CCDate_2021_Data_ClRole_ClEx['Time'].str.startswith(str(x))]))
+    Usage_amount_month_list.append(x)
+
+plt.bar(range(len(Usage_amount_data_list)), Usage_amount_data_list, tick_label = Usage_amount_month_list)
+
+plt.xlabel("Month (2021)")  # Set X-axis Y-axis name  
+plt.ylabel("Usage amount") 
+
+for a,b in zip(range(len(Usage_amount_data_list)),Usage_amount_data_list):  # Use text to display values 
+    plt.text(a, b+0.05, '%.0f' % b, ha='center', va='bottom',fontsize=10) 
+
+plt.show()
