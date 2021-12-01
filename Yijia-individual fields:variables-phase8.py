@@ -127,3 +127,39 @@ for a,b in zip(range(len(Usage_amount_data_list)),Usage_amount_data_list):  # Us
     plt.text(a, b+0.05, '%.0f' % b, ha='center', va='bottom',fontsize=10) 
 
 plt.show()
+
+# **2. Usage amount by male and female per month**      
+# Usage amount by male and female per month
+pic = plt.figure(figsize=(10,6),dpi=80) 
+
+Usage_amount_data_list_male = []
+Usage_amount_data_list_female = []
+Usage_amount_month_list = []
+
+# Identify the month and gender and generate the dataset by identifying the beginning of the Time list string
+for x in range(3, 12):
+    a=CCDate_CMC_2021_inner[CCDate_CMC_2021_inner['Time'].str.startswith(str(x))]
+    Usage_amount_data_list_male.append(len(a[a['Gender']=='M']))
+    Usage_amount_data_list_female.append(len(a[a['Gender']=='F']))
+    Usage_amount_month_list.append(x)
+
+list_len =list(range(len(Usage_amount_data_list_male)))
+total_width, n = 0.8, 2
+width = total_width / n
+
+plt.bar(list_len, Usage_amount_data_list_male, width=width, label='Male', fc = 'y')
+for i in range(len(list_len)):
+    list_len[i] = list_len[i] + width
+plt.bar(list_len, Usage_amount_data_list_female, width=width, label='Female',tick_label = Usage_amount_month_list,fc = 'r')
+
+plt.xlabel("Month (2021)")  # Set X-axis Y-axis name  
+plt.ylabel("Usage amount") 
+
+for a,b in zip(range(len(Usage_amount_data_list_male)),Usage_amount_data_list_male):  # Use text to display values 
+    plt.text(a, b+0.05, '%.0f' % b, ha='center', va='bottom',fontsize=10) 
+    
+for a,b in zip(range(len(Usage_amount_data_list_female)),Usage_amount_data_list_female):  # Use text to display values 
+    plt.text(a+0.4, b+0.05, '%.0f' % b, ha='center', va='bottom',fontsize=10) 
+
+plt.legend()
+plt.show()
