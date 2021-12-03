@@ -187,3 +187,27 @@ while x<110:
     y+=1 # Subplots +1
 
 plt.show()
+
+# **4. LinkTitle Distribution in 'Internet' and 'Category'**      
+
+# LinkTitle Distribution in 'Internet' and 'Category'
+pic = plt.figure(figsize=(10,5),dpi=80) 
+
+CCDate_2021_Data_ClRole_ClEx_Internet=CCDate_2021_Data_ClRole_ClEx[CCDate_2021_Data_ClRole_ClEx['LinkType']=='Internet']['LinkTitle']
+CCDate_2021_Data_ClRole_ClEx_Category=CCDate_2021_Data_ClRole_ClEx[CCDate_2021_Data_ClRole_ClEx['LinkType']=='Category']['LinkTitle']
+
+LinkTitle_counts_Internet = CCDate_2021_Data_ClRole_ClEx_Internet.value_counts()
+LinkTitle_counts_Category = CCDate_2021_Data_ClRole_ClEx_Category.value_counts()
+
+LinkTitle_counts_Internet_clean=LinkTitle_counts_Internet[LinkTitle_counts_Internet>1000] #清洗掉过小的数据
+LinkTitle_counts_Category_clean=LinkTitle_counts_Category[LinkTitle_counts_Category>1000]
+
+fig1 = pic.add_subplot(1,2,1)
+plt.pie(LinkTitle_counts_Internet_clean, labels = LinkTitle_counts_Internet_clean.index, startangle = 90, counterclock = False, autopct=make_autopct(LinkTitle_counts_Internet_clean));
+plt.title('LinkTitle Distribution in Internet',fontsize=12)
+
+fig2 = pic.add_subplot(1,2,2)
+plt.pie(LinkTitle_counts_Category_clean, labels = LinkTitle_counts_Category_clean.index, startangle = 90, counterclock = False, autopct=make_autopct(LinkTitle_counts_Category_clean));
+plt.title('LinkTitle Distribution in Category',fontsize=12)
+
+plt.show()
