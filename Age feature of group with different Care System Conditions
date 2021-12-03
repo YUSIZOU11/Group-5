@@ -8,7 +8,7 @@ CMC_data = pd.read_csv("CustomerMedicalConditions04Nov21.csv")
 # 
 CC_data = pd.read_csv("CCDate2018-2021_AllTime_Data.csv")
 
-# Cleaning data1
+# Cleaning data1 2
 # Why? -> this is because in medical data, in some cases, multiple rows are repeated for an External ID because there are different StaffPlanConditions for the same External ID.
 # So, to analysis the age distribution for different medical conditions, every user(External ID) should only be counted for once.
 data_18 = CMC_data.drop(CMC_data.index[CMC_data['Age'] < 18])  
