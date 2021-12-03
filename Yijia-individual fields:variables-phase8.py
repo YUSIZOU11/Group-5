@@ -163,3 +163,27 @@ for a,b in zip(range(len(Usage_amount_data_list_female)),Usage_amount_data_list_
 
 plt.legend()
 plt.show()
+
+# **3. Health condition for different age groups**      
+
+# Health condition for different age groups
+pic2 = plt.figure(figsize=(20,20),dpi=80) 
+
+x=0 # Age group
+y=1 # Subplots
+
+while x<110:
+    a=CMC_2021_Data_OnlyID[(CMC_2021_Data_OnlyID['Age']>=x) & (CMC_2021_Data_OnlyID['Age']<(x+10))]
+    CSC_counts=a['CareSysCondition'].value_counts(dropna=False)
+#     print(CSC_counts)
+    
+    fig1 = pic2.add_subplot(4,3,y) # Subplots
+    plt.pie(CSC_counts, labels = CSC_counts.index, startangle = 90, counterclock = False, autopct=make_autopct(CSC_counts));
+    
+    s = 'Age: {n}-{m}'
+    plt.title(s.format(n=x, m=x+9),fontsize=12)
+    
+    x+=10 # Age group +10
+    y+=1 # Subplots +1
+
+plt.show()
