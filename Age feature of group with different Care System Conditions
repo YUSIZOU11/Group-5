@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 %matplotlib inline 
 
 CMC_data = pd.read_csv("CustomerMedicalConditions04Nov21.csv")
+# 
 CC_data = pd.read_csv("CCDate2018-2021_AllTime_Data.csv")
 
 # Cleaning data
