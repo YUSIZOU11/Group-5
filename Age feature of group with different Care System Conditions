@@ -30,7 +30,7 @@ count = 0
 for ID in noCon_noID_data['ExternalID']:
     for other_id in noCon_noID_data['ExternalID'][0:count]:
         assert ID != other_id, "One External ID should not appear more than once!"
-    count += 1
+    count += 1 
 for Cons in noCon_noID_data['CareSysCondition']:
     assert Cons != '', "There is still null!"
     
