@@ -211,3 +211,39 @@ plt.pie(LinkTitle_counts_Category_clean, labels = LinkTitle_counts_Category_clea
 plt.title('LinkTitle Distribution in Category',fontsize=12)
 
 plt.show()
+
+# ### Hypothesise
+# ####  Hypotheses1: There were events in June that female have more interest, such as discounts on merchandise, resulting in much higher usage by female than male in June.
+# 
+# The 'usage amount' of female users generally a little more than male users'. But in June, the 'usage amount' of female users much more than male users', even more than three times. (Female: 9277, Male: 3614)       
+# So, maybe there were some events that female user want to do more on the platform.        
+# Further research may be needed on how user behaviour in June differs from other months, user interviews, asking data holders.
+# 
+# ![image.png](attachment:image.png)
+# 
+# 
+# #### Hypotheses2: Healthy elderly people are the largest user group
+# User who only require 'Elderly Care/support' rank the first (29.59%), maybe the largest user group is healthy elderly people.          
+# Further research may be needed on asking data holder whether those user are healthy.            
+# ![image-2.png](attachment:image-2.png)
+# 
+# #### Hypotheses3: The user in bigger city are more active?
+# The five regions with the highest levels of activity are in big city like Edinburgh, Glasgow, etc. So maybe the user in bigger city are more active.          
+# The reason might be that the larger the city, the greater the user needs and the larger the facilities opened, the more users there will be and so more active.         
+# Further research may be needed on the city pupolation, CleverCogs' facilities.        
+# ![image-4.png](attachment:image-4.png)
+# 
+# #### Hypotheses4: The reason for the high proportion of 'mental health' among young people is the lockdown
+# Among the health problems of users younger than 70, 'Mental Health issues' is the most important problem.       
+# Maybe because the lockdown, people go out or hung out with their friends less often, leading to mental health issues.       
+# Further research may be needed on comparing with the date before the lockdown.       
+# ![image-6.png](attachment:image-6.png)
+# 
+# #### Hypotheses5: Users younger than 10 years old may be relatives of staff members
+# The majority of the data were adults. But there were seven outliers younger than 10 years old and only one of them had a health problem, the remaining six had no health problems. If they are not old or do not have health problem, Why are they become the users of CleverCogs?
+# 
+# Maybe the user younger than 10 years old is relative of staff members, for some kind of convenience to register CleverCogs.
+# 
+# Further research may be needed on know more about these users' behavior, asking data holder. 
+# 
+# ![image-7.png](attachment:image-7.png)
