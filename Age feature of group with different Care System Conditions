@@ -23,7 +23,7 @@ for Cons in Cons_data:
     if pd.isnull(Cons):
         noCon_noID_data.iloc[CountCon,6] = 'Unknown Condition'
     CountCon += 1
-    
+     
 # Use assertions to make sure the there is no repeating external ID, and all no null value
 count = 0
 for ID in noCon_noID_data['ExternalID']:
