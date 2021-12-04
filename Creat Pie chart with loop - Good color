@@ -12,3 +12,4 @@ for name,group in Time_Condition_data_no_unknown.groupby('CareSysCondition'):
     plt.title("Gender Contribution in Activity Usage of group with " + name, fontsize=10, y=1.08) # Give some space between Title and fig
     plt.axis('equal')
     plt.show()
+
