@@ -1,0 +1,37 @@
+import os    
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.style as style
+import seaborn as sns
+import warnings
+
+style.use('seaborn')
+warnings.filterwarnings('ignore')
+
+data1 = pd.read_excel('./CCDate2018-2021.xlsx')
+data1
+
+#数据清洗
+data1_ = data1[data1['Role'] == 'User']#Only user data is retained
+data1_.dropna(subset=['ExternalID'],inplace=True)
+data1_.index = range(data1_.shape[0])
+data1_
+
+#Clean up first.  
+data1_['VisitorID']=data1_['VisitorID'].astype(str)
+new_data= data1_.drop_duplicates(subset=['VisitorID'],keep='last',inplace=False)#The last line of the duplicate item was chosen in consideration of the possibility that older people might change addresses during this period
+user_num= new_data.groupby('Location')['VisitorID'].count
+new_data
+
+# user address distribution analysis
+data_adr = new_data['Location'].value_counts().reset_index()
+data_adr.columns = ['Address','User_Number']
+data_adr
+
+#Data visualization
+plt.figure(figsize=(20,10))
+sns.barplot(x='Address',y='User_Number',data=data_adr)
+plt.title('Data distribution of different address')
+plt.xticks(rotation=270)
+plt.show()
