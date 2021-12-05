@@ -6,6 +6,34 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 get_ipython().run_line_magic('matplotlib', 'inline')
 
+# #### `CCData2018-2021` 
+# **Summary**: 654915 user's behavior dataset between January 2018 and November 2021.    
+# **Data type**: tabular  
+# **Rows**: 654915 rows, each row representing one user action.   
+# **Columns**: 9 columns. Which is `Time`, `VisitorID`, `ExternalID`, `Role`, `Location`, `Link Title`, `Link Type`, `ContentInfo`, `URL`    
+# **Value Type**: String.   
+# **Time Frame**: There is data here going back to January 2018 until November 2021.   
+# **Links**: This file can use 'External ID' to link to `User2021` and `CustomerMedicalConditions`, and use 'Visiter ID' to link to `User2021`.   
+#  
+# #### `User2021`
+# **Summary**: 3641 user information dataset in 2021     
+# **Data type**: tabular   
+# **Rows**: 3641 rows of data, each row representing one user's information      
+# **Columns**: 6 columns. Which is `User ID`, `VisitorID`, `External ID`, `Birth date`, `Gender`, `Location`       
+# **Value Type**: String.    
+# **Time Frame**: The data in this file only show the user still alive in 2021.   
+# **Links**: This file can use 'External ID' to link to `CCData2018-2021` and `CustomerMedicalConditions`, and use 'Visiter ID' to link to `CCData2018-2021`.    
+# 
+# 
+# #### `CustomerMedicalConditions` 
+# **Summary**: 1312 user health status dataset    
+# **Data type**: tabular    
+# **Rows**: 1312 rows of data, each row representing one user's helath information (one user may have several rows)    
+# **Columns**: 7 columns. Which is `External ID`, `CleverCogsUserId`, `Gender`, `DateOfBirth`, `Age`, `StaffPlanConditions`, `CareSysCondition`    
+# **Value Type**: String.     
+# **Time Frame**: The data in this file only show the user still alive in 2021.    
+# **Links**: This file can use 'External ID' to link to `CCData2018-2021` and `User2021`.     
+
 #Convert two Excel files into CSV files, uploading to notebook and loading the files.
 CCDate_2021_Data = pd.read_csv("CCDate2018-2021-3-8.csv")
 CMC_2021_Data = pd.read_csv("CustomerMedicalConditions04Nov21.csv")
