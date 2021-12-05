@@ -1,1 +1,39 @@
+import csv
+sns.set()
 
+
+def get_data():
+    df1 = pd.read_csv('CCDate2018-2021.csv')
+    df1 = df1[df1['Role'] == 'User']
+
+    df2 = pd.read_csv('CustomerMedicalConditions04Nov21.csv')
+    df2 = df2[df2['Age'] >= 18]  # 过滤18岁以下人群
+    df2.dropna(subset=['DateOfBirth'], inplace=True)
+    print(df2)
+
+    column1 = df1.columns
+    column2 = df2.columns
+    print(list(column1))
+    print(list(column2))
+
+    df1.dropna(subset=['ExternalID'], inplace=True)  # 在原始数据帧上“就地”（inplace=True）执行，下同
+    df2.dropna(subset=['External ID'], inplace=True)
+    df2['External ID'] = df2['External ID'].astype(str)
+    f = open('new_data.csv', 'w', newline='', encoding='utf-8')
+    csv_writer = csv.writer(f)
+    header = list(column1) + list(column2)
+    csv_writer.writerow(header)
+    for row in df2.values:
+        id = row[0]
+        if id.replace(' ', '') != '':
+            id = int(id)
+            data = df1[df1['ExternalID'] == id]
+            if data.values.__len__() == 0:  # 跳过空值
+                continue
+
+            for item in data.values:
+                # item = np.array(item)
+                # print(list(item), list(row))
+                csv_writer.writerow(list(item) + (list(row)))
+
+    f.close()
