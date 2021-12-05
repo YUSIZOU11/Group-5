@@ -1,0 +1,27 @@
+def figures():
+    # Read the data
+    df = pd.read_csv('new_data.csv')
+    # Remove the duplicate by Time and VisitorID, and keep the last row
+    df.drop_duplicates(subset=['Time', 'VisitorID'], keep='last', inplace=False)
+    # Organize time and year
+    df['Time'] = df['Time'].apply(lambda x: str(x).split('/')[-1][:2])
+    # Use only 21 years of data
+    df = df[df['Time'] == '21']
+    # Plot the number distribution of ages (boxplot)
+    plt.figure(figsize=(10,8))
+    sns.boxplot(df['Age'])
+    plt.title('Age box diagram')
+    plt.show()
+
+    # According to the box chart, most people are between 50 and 70 years old
+    df = df[(df['Age'] > 50) | (df['Age'] < 70)]
+    # Gets the number of different Link types in the current age group
+    plt.figure(figsize=(10,8))
+    data = df.groupby('Link  Type')['Age'].count()
+    sns.barplot(data.index, data.values)  # Draw a bar chart
+    plt.title('Distribution of Link Type use among 50-70 year olds')
+    plt.xlabel('Link Type')
+    plt.ylabel('number')
+    plt.show()
+    
+    
