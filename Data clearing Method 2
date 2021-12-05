@@ -1,0 +1,11 @@
+#Delete the duplicate value based on ExternalID
+data_cond =total_data.drop_duplicates(subset=['ExternalID','ExternalID'], keep='last', inplace=False)
+data_cond
+
+
+#we only need to pay attention to the use of users
+#delete the data row with ExternalID empty
+data1_ = data1[data1['Role'] == 'User']#Only user data is retained
+data1_.dropna(subset=['ExternalID'],inplace=True)
+data1_.index = range(data1_.shape[0])
+data1_
